@@ -101,7 +101,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .topnav__inner {
   display: flex;
   align-items: center;
-  gap: var(--sp-10);
+  gap: var(--sp-6);
   height: 76px;
 }
 .topnav__logo {
@@ -125,13 +125,11 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .topnav__list a.is-active,
 .topnav__list a:hover { color: var(--color-brand-bright); }
+.topnav__list-login { display: none; }
 
-.topnav__cta {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-5);
-  flex-shrink: 0;
-}
+.topnav__login { flex-shrink: 0; }
+.topnav__cta-button { flex-shrink: 0; }
+
 .link-strong {
   font-weight: 700;
   font-size: 14px;
@@ -148,6 +146,7 @@ h1, h2, h3, h4, p { margin: 0; }
   align-items: center;
   gap: 4px;
   border-radius: var(--r-sm);
+  flex-shrink: 0;
 }
 .topnav__toggle span {
   display: block;
@@ -927,6 +926,22 @@ h1, h2, h3, h4, p { margin: 0; }
   opacity: .65;
   text-align: center;
 }
+.contact__error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(220, 38, 38, 0.08);
+  color: #b91c1c;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.contact__error--success {
+  background: rgba(16, 185, 129, 0.1);
+  color: #047857;
+}
+.field__input--invalid {
+  border-color: #dc2626 !important;
+}
 
 /* ============ FOOTER ============ */
 .footer {
@@ -990,11 +1005,81 @@ h1, h2, h3, h4, p { margin: 0; }
   .cta-banner__title { max-width: 100%; flex: 1 1 100%; }
 }
 
+@media (max-width: 900px) {
+  .topnav__inner { gap: var(--sp-3); }
+
+  .topnav__menu {
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--color-card);
+    border-bottom: 1px solid var(--color-divider);
+    padding: var(--sp-5);
+    box-shadow: 0 16px 40px rgba(0, 50, 49, 0.10);
+    max-height: calc(100vh - 76px);
+    overflow-y: auto;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity .2s ease, transform .25s ease, visibility 0s linear .25s;
+  }
+  .topnav__menu.is-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition: opacity .2s ease, transform .25s ease;
+  }
+
+  .topnav__list {
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
+  .topnav__list a {
+    display: block;
+    padding: 12px 8px;
+    font-size: 16px;
+  }
+  .topnav__list-login { display: block; border-top: 1px solid var(--color-divider); margin-top: var(--sp-3); padding-top: var(--sp-3); }
+
+  .topnav__login { display: none; }
+  .topnav__cta-button { margin-left: auto; }
+  .topnav__toggle { display: flex; }
+}
+
+@media (max-width: 380px) {
+  .topnav__cta-button { padding: 8px 14px; font-size: 13px; }
+}
+
 @media (max-width: 760px) {
   :root { --gutter: 16px; }
   .section { padding: var(--sp-16) 0; }
-  .cta-banner__inner { padding: 28px; }
-  .cta-banner__title { font-size: 22px; }
+
+  .hero { padding-top: var(--sp-10); padding-bottom: var(--sp-10); }
+  .hero__title { margin-top: var(--sp-4); }
+  .hero__subtitle { margin-top: var(--sp-5); }
+  .hero__actions { margin-top: var(--sp-6); width: 100%; }
+  .hero__actions .btn { flex: 1 1 auto; min-width: 0; }
+  .hero__visual { margin-top: var(--sp-8); }
+  .hero__window { padding: 28px 10px 10px 10px; }
+  .hero__card { padding: 32px 24px; min-height: 0; }
+
+  .benefit-grid { grid-template-columns: 1fr; }
+  .benefit-card { padding: 28px; }
+  .sector-grid  { grid-template-columns: 1fr; }
+  .steps-grid   { grid-template-columns: 1fr; }
+  .stats__grid  { grid-template-columns: 1fr; }
+  .stat         { padding: var(--sp-6); }
+  .stat__value  { font-size: 32px; }
+
+  .cta-banner { margin: var(--sp-12) 0; }
+  .cta-banner__inner { flex-direction: column; align-items: stretch; padding: 28px; }
+  .cta-banner__title { font-size: 22px; text-align: center; max-width: 100%; }
+  .cta-banner__badges { flex-direction: column; align-items: center; width: 100%; }
   .cta-badge--logos {
     width: 100%;
     max-width: 360px;
@@ -1006,48 +1091,33 @@ h1, h2, h3, h4, p { margin: 0; }
     padding: 16px;
   }
   .cta-badge--seal img { width: 100px; height: 100px; }
-  .topnav__menu {
-    position: absolute;
-    top: 76px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    background: var(--color-card);
-    border-bottom: 1px solid var(--color-divider);
-    padding: var(--sp-5);
-    transform: translateY(-110%);
-    transition: transform .25s ease;
-    box-shadow: 0 16px 40px rgba(0, 50, 49, 0.10);
-  }
-  .topnav__menu.is-open { transform: translateY(0); }
-  .topnav__list {
-    flex-direction: column;
-    gap: var(--sp-4);
-  }
-  .topnav__cta {
-    margin-top: var(--sp-4);
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--sp-3);
-  }
-  .topnav__cta .btn { justify-content: center; }
-  .topnav__toggle { display: flex; }
 
-  .hero__card { padding: 32px 24px; min-height: 0; }
-
-  .benefit-grid { grid-template-columns: 1fr; }
-  .sector-grid  { grid-template-columns: 1fr; }
-  .steps-grid   { grid-template-columns: 1fr; }
-  .stats__grid  { grid-template-columns: 1fr; }
-  .stat         { padding: var(--sp-6); }
-  .stat__value  { font-size: 32px; }
-
-  .cta-banner__inner { flex-direction: column; align-items: flex-start; }
   .innovation { padding: var(--sp-8); }
-  .contact__form { padding: var(--sp-6); }
+  .innovation__title { font-size: 28px; }
+
+  .contact__tabs {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .contact__tabs::-webkit-scrollbar { display: none; }
+  .contact__tab { white-space: nowrap; flex-shrink: 0; }
+  .contact__form { padding: var(--sp-6); gap: 20px; }
+  .contact__profile { gap: 14px; }
+  .contact__profile-icon { width: 52px; height: 52px; }
+
   .footer__inner { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 420px) {
+  .hero__title { font-size: clamp(28px, 8vw, 34px); }
+  .hero__subtitle { font-size: 17px; }
+  .hero__description { font-size: 16px; }
+  .hero__actions { flex-direction: column; align-items: stretch; }
+  .hero__actions .btn { width: 100%; }
+  .section__title { font-size: clamp(24px, 7vw, 28px); }
+  .innovation__title { font-size: 24px; }
 }
 
 /* Reduced motion */

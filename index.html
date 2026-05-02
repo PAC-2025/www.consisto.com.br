@@ -23,23 +23,22 @@
         <img src="assets/icons/consisto-logo.svg" alt="Consisto" width="124" height="30" />
       </a>
 
-      <button type="button" class="topnav__toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="topnav-menu">
-        <span></span><span></span><span></span>
-      </button>
-
       <nav class="topnav__menu" id="topnav-menu" aria-label="Principal">
         <ul class="topnav__list">
           <li><a href="#" class="is-active">Início</a></li>
           <li><a href="#vantagens">Vantagens</a></li>
           <li><a href="#sobre">Sobre a plataforma</a></li>
           <li><a href="#faq">Perguntas frequentes</a></li>
+          <li class="topnav__list-login"><a href="https://app.consisto.com.br/auth/login" class="link-strong">Log in</a></li>
         </ul>
       </nav>
 
-      <div class="topnav__cta">
-        <a href="#login" class="link-strong">Log in</a>
-        <a href="#contato" class="btn btn--primary btn--sm">Tenho interesse</a>
-      </div>
+      <a href="https://app.consisto.com.br/auth/login" class="link-strong topnav__login">Log in</a>
+      <a href="#contato" class="btn btn--primary btn--sm topnav__cta-button">Tenho interesse</a>
+
+      <button type="button" class="topnav__toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="topnav-menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -357,7 +356,7 @@
             </div>
           </div>
 
-          <form class="contact__form" novalidate>
+          <form class="contact__form" data-tipo="responsavel_tecnico" novalidate>
             <div class="contact__profile">
               <div class="contact__profile-icon" aria-hidden="true">
                 <img src="assets/icons/employee.svg" alt="" />
@@ -380,8 +379,10 @@
 
             <label class="field">
               <span class="field__label">WhatsApp</span>
-              <input class="field__input" type="tel" name="whatsapp" placeholder="+55 (11) 99999-9999" required />
+              <input class="field__input" type="tel" name="whatsapp" placeholder="(11) 99999-9999" inputmode="numeric" maxlength="15" required />
             </label>
+
+            <p class="contact__error" role="alert" hidden></p>
 
             <button type="submit" class="btn btn--primary btn--block btn--lg">Quero entrar em contato</button>
             <p class="contact__terms">Ao enviar, você concorda em ser contatado pela equipe Consisto.</p>
